@@ -1,0 +1,23 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for lordtaytertot.gnome-extensions
+
+- name: Get GNOME Shell version
+  ansible.builtin.shell: gnome-shell --version | awk '{print $NF}'
+  register: gnome_shell_version
+  changed_when: false
+
+- name: Create ~/.local/share/gnome-shell/extensions/
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/.local/share/gnome-shell/extensions/"
+    state: directory
+    recurse: true
+
+- name: Get list of GNOME extensions
+  ansible.builtin.command: ls {{ ansible_user_dir }}/.local/share/gnome-shell/extensions/
+  register: gnome_extensions_list
+  changed_when: false
+
+- name: Install extension(s)
+  ansible.builtin.include_tasks: gnome-extension-tasks.yml
+  loop: "{{ gnome_extension_ids }}"

@@ -1,0 +1,15 @@
+#SPDX-License-Identifier: MIT-0
+---
+# gnome-extensions-tasks.yml
+
+- name: Get GNOME extension information
+  ansible.builtin.uri:
+    url: https://extensions.gnome.org/extension-info/?pk={{ item }}&shell_version={{ gnome_shell_version.stdout }}
+    return_content: true
+  register: gnome_extension_info
+
+- name: Install GNOME extension
+  ansible.builtin.command: gnome-extensions install https://extensions.gnome.org{{ gnome_extension_info.json.download_url }}
+  register: install_gnome_extension
+  changed_when: install_gnome_extension.rc == 0
+  when: gnome_extension_info.json.uuid not in gnome_extensions_list.stdout

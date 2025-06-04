@@ -1,0 +1,10 @@
+#SPDX-License-Identifier: MIT-0
+galaxy_info:
+  author: lordtaytertot
+  description: Manages GNOME Extensions
+  license: MIT
+  min_ansible_version: 2.10
+  galaxy_tags:
+    - gnome
+    - extensions
+dependencies: []
