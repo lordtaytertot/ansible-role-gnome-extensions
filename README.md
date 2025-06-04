@@ -1,7 +1,7 @@
 lordtaytertot.gnome-extensions
 ==============================
 
-Manages GNOME Extensions
+Manages GNOME Extensions using the newer `gnome-extensions` command
 
 Requirements
 ------------
@@ -13,7 +13,7 @@ Role Variables
 
 Dependencies
 ------------
-[GNOME](https://www.gnome.org/)
+[GNOME](https://www.gnome.org/) 3.34+
 
 Example Playbook
 ----------------
